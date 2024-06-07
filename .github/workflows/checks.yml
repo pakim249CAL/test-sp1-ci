@@ -1,0 +1,17 @@
+name: checks
+run-name: Execution precheckin for change by ${{ github.actor }}
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  test-prove:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Install SP1
+        run: |
+          curl -L https://sp1.succinct.xyz | bash
+          ~/.sp1/bin/sp1up 
+          ~/.sp1/bin/cargo-prove prove --version
